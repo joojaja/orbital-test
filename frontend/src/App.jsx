@@ -6,6 +6,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 
+// Helper component to access auth context in route element
+function AuthCheck() {
+  const { user } = useAuth();
+  return user ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />;
+}
+
+
 function App() {
   return (
     <AuthProvider>
@@ -21,21 +28,11 @@ function App() {
           </Route>
 
           {/* Root path redirect */}
-          <Route path="/" element={
-            <AuthCheck>
-              {(user) => user ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />}
-            </AuthCheck>
-          } />
+          <Route path="/" element={<AuthCheck />} />
         </Routes>
       </Router>
     </AuthProvider>
   );
-}
-
-// Helper component to access auth context in route element
-function AuthCheck({ children }) {
-  const { user } = useAuth();
-  return children(user);
 }
 
 export default App;

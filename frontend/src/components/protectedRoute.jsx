@@ -3,7 +3,7 @@ import AuthService from "../services/authenticationService";
 import { useAuth } from "../services/authContext";
 
 // This component is used to protect routes that require authentication
-const ProtectedRoute = () => {
+function ProtectedRoute() {
     // Check if the user is authenticated, if the token is stored in localStorage
     const { user, loading } = useAuth();
 
