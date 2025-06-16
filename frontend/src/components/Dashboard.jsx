@@ -1,5 +1,6 @@
 import "../styles/Dashboard.css";
 import AuthService from "../services/authenticationService";
+import { useAuth } from "../services/authContext";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -13,20 +14,14 @@ const sidebarItems = [
 
 export default function Dashboard(props) {
 
-    const token = AuthService.getCurrentUser();
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
     // Get the name of the user
-    let user = "";
-    if (token === null) {
-        // Should not happen, if u see this the protected route failed
-        user = "Guest";
-    } else {
-        user = AuthService.getCurrentUser().name;
-    }
+    const userName = user?.user_metadata?.name || user?.email || "Guest";
 
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        AuthService.logout();
+    const handleLogout = async () => {
+        await logout();
         navigate("/");
     };
 
