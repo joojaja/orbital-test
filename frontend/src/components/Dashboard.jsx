@@ -34,7 +34,7 @@ export default function Dashboard(props) {
                     {/* Sidebar Profile Pic and Name*/}
                     <div className="profile">
                         <div className="profile-picture"></div>
-                        <a className="profile-name">{user}</a>
+                        <a className="profile-name">{userName}</a>
                     </div>
                     {/* Sidebar Other tabs*/}
                     <div className="sidebar-tabs">
